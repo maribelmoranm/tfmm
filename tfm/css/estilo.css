@@ -1,0 +1,435 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+body{
+	font-family: "Open Sans",sans-serif;
+	
+}
+header{
+	height: 100vh;
+	background-image: linear-gradient(to top, rgba(165,143,202, 0.400) 0%,rgba(231,192,231,0.4) 100%),url("../img/2.jpg");
+	background-size: cover; /*para que me respete el tamaño de imagen sn ampliar*/
+	background-repeat: no-repeat;
+	background-attachment: fixed; /*mantenemos fija la imagen para crear una especie de efecto parallax*/
+	background-position: center; /*centramos imagen*/
+}
+
+.iconomenu {
+	position: fixed;
+	top: 30px;
+	right: 30px;
+	background-color: #fff;
+	width: 40px; /*con esta propiedad daremos un ancho*/
+	height: 40px;/*con esta propiedad daremos el alto*/
+	cursor: pointer; /*saldrá el cursor al pasarlo por la imagen*/
+	border-radius: 10px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+	z-index: 1; /*moveremos una capa por encima*/
+}
+.menudesplegable{ 
+	position: fixed;
+    top: 0;
+    right: 0;
+    width: 30vw;
+    height: 100%;
+    background-image: linear-gradient(135deg,#667eea 0,#764ba2 100%);
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 6px rgb(0 0 0 / 50%);
+    transition: transform .3s ease-in-out;
+    transform: translate(100%);
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-around;
+	
+}
+.menudesplegable a  {
+	color: #fff;
+	text-decoration: none;
+}
+
+.contenedor {
+	width:90%;
+	max-width:1200px;
+	overflow: hidden;
+	margin: auto;
+	padding:60px 0;
+}
+.head{
+	padding: 0;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	color: #fff;
+	text-align: center;
+}
+h1{
+	font-size: 60px;
+	margin-bottom: 15px;
+}
+p{
+	font-weight: 300;
+	font-size: 25px;
+}
+
+.spread { 
+	transform: translate(0); /*así el menú desplegable podrá aparecer ya que vuelve a su estado por el valor 0, y spread es la clase que le hemos puesto al toggle*/
+}
+
+
+/*BIOGRAFÍA*/
+
+h2 {
+	text-align: center;
+	font-weight: 300;
+	color:#9f8ad0;
+	margin-bottom: 40px;
+	font-size: 40px;
+}
+.contenedor-bio { 
+
+	height: auto;
+	display: flex; 
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap ; 
+
+}
+
+.contenedor-bio img {
+	width: 25%;
+	border-radius: 50%;
+	display: flex;
+
+	margin-bottom: 20px;
+
+}
+.check-bio {
+	width: 100%;
+}
+.bio {
+	margin-bottom: 20px;
+}
+.n-bio{
+	margin-bottom: 7px;
+	color: #9f8ad0;
+}
+.numero { /*estilizamos los números*/
+	display: inline-block;
+	background-image: linear-gradient(to top, #a18cd1 0, #fbc2eb 100%);
+	width: 30px;
+	height: 30px;
+	color: #fff;
+	text-align: center;
+	border-radius: 50%;
+	font-weight: 700;
+	line-height: 30px;
+	margin-right: 5px;
+}
+.text-bio{
+	font-weight: 300;
+	font-size: 20px;
+
+}
+/*SECCIÓN OBRAS*/
+
+.img-obras:hover{ /*el efecto de agrandarse las imágenes es el hover, el hover detecta que se pone el cursor encima, y si
+	esto ocurre aplica lo de dentro, en este caso el escalado a 1.05*/
+	
+	transform: scale(1.05
+
+	);
+}
+
+.obrasdali {
+	background-color: #f2f2f2;
+}
+
+.contenedor-obras{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+}
+
+.img-obras {
+	width: 30%;
+	display: grid;
+	margin-top: 40px;
+	box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+	cursor: pointer; /*saldrá el cursor al pasarlo por la imagen*/
+	/*object-fit: cover; /*mantenemos el tamaño de las imágenes*/
+}
+/*comenzaremos para crear efecto en el que abres la imagen, terminaremos de configurar con js*/
+.image-light{
+	position: fixed; /*lo fijamos a la pantalla*/
+	background-color: rgba(0, 0, 0, 0.6); /*creamos el efecto de oscuridad tras la imagen*/
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform .2s ease-in-out;
+	transform: translate(100%); /*para poder ocultar esta imagen*/
+	z-index: 2; /*moveremos dos capas por encima para no solapar con el menu cuando abramos una foto*/
+}
+
+.agregar-imagen{
+	object-fit: cover; /*mantenemos tamaño de imagen*/
+	border-radius: 10px;
+	max-height: 80%;
+	transform: scale(0); /*escalamos imagen*/
+	transition: transform .3s .2s; /*creamos el efecto de transición al abrir la imagen*/ 
+	/*se verá tras configurarlo en js*/
+}
+
+.cerrar{ /*estilizamos la  X que cerrará nuestra imagen*/
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 40px;
+	cursor: pointer;
+	z-index: 2;
+}
+/*ésta clase la activaremos con javascript*/
+.mostrarImagen { /*mostrará la imagen*/
+	transform: scale(1);
+}
+
+.mostrar { /*para que cuando demos click con javascript se pueda activar*/
+	transform: translate(0);
+}
+
+
+
+/*PARA HACER LA WEB RESPONSIVE*/
+
+@media screen and (max-width:1200px){
+	.menudesplegable a{
+		font-size: 25px;
+	}
+	.cerrar{ /*haremos esto para mantener la X de cerrar siempre visible*/
+	z-index: 2;
+	}
+	.agregar-imagen{ /*haremos esto para mantener el tamaño de la imagen en cualquier dispositivo*/
+		border-radius: 10px;
+		max-width: 90%;
+		max-height: 90%;
+	}
+	
+	.dali{
+		max-width: 90%;
+		max-height: 90%;
+	}
+	.contenedor-obras{
+		justify-items: center;
+		display: inline-grid;
+	}
+	
+
+}
+@media screen and (max-width:950px){
+	.menudesplegable a{
+		font-size: 25px;
+	}
+	.header{
+		display:block;
+	}
+	.seccion h1{
+		display:inline-block;
+	}
+	.seccion nav{
+		margin-top:20px;
+
+	}
+	.cerrar{ /*haremos esto para mantener la X de cerrar siempre visible*/
+	z-index: 2;
+	}
+	.dali{
+		min-height: 50%;
+		min-width: 50%;
+		max-width: 90%;
+		max-height: 90%;
+	}
+
+	.agregar-imagen{ /*haremos esto para mantener el tamaño de la imagen en cualquier dispositivo*/
+		border-radius: 10px;
+		max-width: 90%;
+		max-height: 100%;
+	}
+	.contenedor-obras{
+		justify-items: center;
+		display: inline-grid;
+	}
+
+@media screen and (max-width:750px){
+	.menudesplegable a{
+		font-size: 20px;
+	}
+	.contenido{
+		width:70%;
+	}
+	.contenido h2{
+		font-size:4em;
+		position:static;
+	}
+	.cerrar{ /*haremos esto para mantener la X de cerrar siempre visible*/
+	z-index: 2;
+	}
+	.dali{
+		min-height: 50%;
+		min-width: 50%;
+		max-width: 90%;
+		max-height: 90%;
+	}
+
+
+	.agregar-imagen{ /*haremos esto para mantener el tamaño de la imagen en cualquier dispositivo*/
+		border-radius: 10px;
+		max-width: 90%;
+		max-height: 100%;
+	}
+	.contenedor-obras{
+		justify-items: center;
+		display: inline-grid;
+	}
+
+}
+	@media screen and (max-width:500px){
+	.menudesplegable a{
+		font-size: 20px;
+	}
+
+	.dali{
+		min-height: 50%;
+		min-width: 50%;
+		max-width: 90%;
+		max-height: 90%;
+	}
+	.biografia{
+		display:none;	
+
+	}
+	header{
+		padding:10px;
+	}
+	h1{
+		font-size:1.6em;
+	}
+	h1 span{
+		display:block;
+	}
+	nav a{
+		font-size:2em;
+
+	}
+	nav span{
+		bottom:20px;
+		right: 20px;
+
+	}
+	nav li:first-child a{
+		background-position:center 0;
+	}
+
+	nav li:last-child a{
+		background-position:center -50px;
+	}
+	.seccion nav{
+		width:100%;
+	}
+	.contenido{
+		width:80%;
+	}
+
+	.cerrar{ /*haremos esto para mantener la X de cerrar siempre visible*/
+	z-index: 2;
+	}
+
+	.agregar-imagen{ /*haremos esto para mantener el tamaño de la imagen en cualquier dispositivo*/
+		border-radius: 10px;
+		max-width: 90%;
+		max-height: 100%;
+	}
+	.contenedor-obras{
+		justify-items: center;
+		display: inline-grid;
+	}
+	
+	
+}
+
+@media screen and (max-width:300px){
+	.menudesplegable a{
+		font-size:15px;
+	}
+	.dali{
+		min-height: 50%;
+		min-width: 50%;
+		max-width: 90%;
+		max-height: 90%;
+	}
+
+	}
+	.biografia{
+		display:none;	
+
+	}
+	header{
+		padding:10px;
+	}
+	h1{
+		font-size:1.6em;
+	}
+	h1 span{
+		display:block;
+	}
+	nav a{
+		font-size:2em;
+
+	}
+	nav span{
+		bottom:20px;
+		right: 20px;
+
+	}
+	nav li:first-child a{
+		background-position:center 0;
+	}
+
+	nav li:last-child a{
+		background-position:center -50px;
+	}
+	.seccion nav{
+		width:100%;
+	}
+	.contenido{
+		width:80%;
+	}
+
+	.cerrar{ /*haremos esto para mantener la X de cerrar siempre visible*/
+		z-index: 2;
+		}
+
+		.agregar-imagen{ /*haremos esto para mantener el tamaño de la imagen en cualquier dispositivo*/
+			border-radius: 10px;
+			max-width: 90%;
+			max-height: 100%;
+		}
+		.contenedor-obras{
+			justify-items: center;
+			display: inline-grid;
+		}
+		
+}
+
+
+
+
